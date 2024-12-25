@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema({
   specialInstructions: { type: String },
   orderDate: { type: Date, default: Date.now },
   email: { type: String, required: true }, 
-  phone: { type: String, required: true }, 
+  phone: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Order', orderSchema);

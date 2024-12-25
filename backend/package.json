@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "eslint ."
   },
   "keywords": [],
@@ -14,10 +14,17 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "express": "^4.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "mongoose": "^8.8.3"
   },
   "devDependencies": {
+    "jest-environment-jsdom": "^29.7.0",
+    "node-mocks-http": "^1.16.2",
     "nodemon": "^3.1.7"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

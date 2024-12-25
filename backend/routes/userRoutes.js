@@ -1,7 +1,6 @@
-// userRoutes.js
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/userController');  // Make sure the path is correct
+const userController = require('../controllers/userController');
 
 // Create User
 router.post('/create', userController.createUser);
@@ -9,7 +8,7 @@ router.post('/create', userController.createUser);
 // Get All Users
 router.get('/', userController.getAllUsers);
 
-// Get User By ID
+// Get User by ID
 router.get('/:id', userController.getUserById);
 
 // Update User
@@ -17,5 +16,8 @@ router.put('/:id', userController.updateUser);
 
 // Delete User
 router.delete('/:id', userController.deleteUser);
+
+// Login User
+router.post('/login', userController.loginUser);
 
 module.exports = router;

@@ -3,9 +3,10 @@ const Product = require('../moduls/ProductSchema'); // Import the Product model
 
 // **Create Product** - Declarative Approach
 exports.createProduct = async (req, res) => {
+  console.log(req.body); // Log the incoming request body
+  
   const { name, description, price, category, stock, image } = req.body;
   
-  // Validate required fields
   if (!name || !price) {
     return res.status(400).json({ message: 'Name and price are required.' });
   }
@@ -20,7 +21,6 @@ exports.createProduct = async (req, res) => {
       image,
     });
 
-    // Save product to the database
     const savedProduct = await newProduct.save();
     res.status(201).json({
       message: 'Product created successfully!',

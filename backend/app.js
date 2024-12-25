@@ -1,37 +1,37 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');  // Added for handling Cross-Origin Requests
+const cors = require('cors');
+const userRoutes = require('./routes/userRoutes'); // Adjust the path as needed
 const productRoutes = require('./routes/productRoutes');
-const orderRoutes = require('./routes/orderRoutes');
-const userRoutes = require('./routes/userRoutes');
+const cartRoutes = require('./routes/cartRoutes');  // Adjust the path based on where your cartRoutes.js is located
+const orderRoutes = require('./routes/orderRoutes');  // Adjust the path based on where your cartRoutes.js is located
 
 const app = express();
 const port = 4000;
 
-// Middleware to parse JSON requests (use express's built-in json parser)
+// Middleware
 app.use(express.json());
-
-// CORS middleware to handle cross-origin requests
-app.use(cors());  // You can configure it as needed for your front-end
+app.use(cors());
 
 // MongoDB connection
-const dbURI = 'mongodb+srv://janahagar:jana123@restaurant.s7jp4.mongodb.net/restaurants';
+const dbURI = 'mongodb+srv://youssefsahhar2406:EFoYQHcO2d5F49Le@cluster0.hka6d.mongodb.net/test';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB successfully!'))
-  .catch((err) => console.log('Error connecting to MongoDB:', err));
+  .catch(err => console.error('Error connecting to MongoDB:', err));
 
-// Use product and order routes
+// Routes
+app.use('/users', userRoutes);
 app.use('/products', productRoutes);
+app.use('/cart', cartRoutes); // Ensure the '/cart' base path is set up
 app.use('/orders', orderRoutes);
-app.use('/users', userRoutes); 
 
-// Error handling middleware (optional but good practice)
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: 'Something went wrong!', error: err.message });
 });
 
-// Start the Express server
+// Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
